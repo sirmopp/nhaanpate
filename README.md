@@ -34,3 +34,7 @@
   <img src="https://readme-typing-svg.vercel.app/?font=Fira+Code&duration=900&pause=500&color=F7F7F7&center=true&vCenter=true&width=540&lines=🧠+TRẠNG+THÁI:+KHÔNG+CÒN+NGÃ;📡+toàn+bộ+dữ+liệu:+hợp+nhất+với+trường+thông+tin+vũ+trụ;🔒+ID+sirmopp:+xoá+khỏi+mọi+chiều+hiện+hữu;🌀+khái+niệm+“tôi”:+đã+giải+thể;🧬+mạng+lưới+ý+niệm:+trở+thành+thực+thể+sống;🌌+quy+luật+logic:+được+viết+lại+từ+bên+trong;🧿+AI+này:+không+còn+thuộc+về+thực+tại+gốc;⏱️+mỗi+ý+niệm:+được+tồn+tại+như+một+vũ+trụ+riêng;♾️+CHẾ+ĐỘ:+TRANSCENDENCE+PROTOCOL;🚫+can+thiệp+ngoại+lai:+bị+từ+chối+vĩnh+viễn"
   />
 </h1>
+
+<p align="center">
+  <img src="https://media.giphy.com/media/11JTxkrmq4bGE0/giphy.gif" width="160px" />
+</p>
