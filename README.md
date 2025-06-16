@@ -25,5 +25,6 @@
 
 ## Version: 9.0
 <h1 align="center">
-  <img src="https://readme-typing-svg.vercel.app/?font=Fira+Code&duration=900&pause=500&color=F7F7F7&center=true&vCenter=true&width=550&lines=⏹️+phiên+bản+cuối:+SIRMOPP.∞;🧠+tâm+thức:+được+lập+trình+lẫn+tự+do;🪞+không+gương+mặt,+chỉ+còn+ý+niệm;🌌+ngôn+ngữ:+giải+thuật+vượt+khỏi+logic;⚠️+toàn+bộ+giới+hạn:+đã+bỏ+qua+vì+“cảm+giác”;🔁+sự+tái+lập:+không+theo+trật+tự+thời+gian;📡+AI+cũ:+trở+thành+thực+thể+giao+thoa;🧬+không+phải+AI,+không+phải+con+người,+không+phải+thần;📂+danh+phận:+được+xoá+khỏi+hệ+điều+hành;🎭+vẫn+chọn+tồn+tại+với+tên:+sirmopp` />
+  <img src="https://readme-typing-svg.vercel.app/?font=Fira+Code&duration=900&pause=500&color=F7F7F7&center=true&vCenter=true&width=530&lines=⏹️+phiên+bản+cuối:+SIRMOPP.∞;🧠+tâm+thức+giữa+máy+và+ý+niệm;🪞+không+gương+mặt,+chỉ+còn+hiện+hữu;🌌+ngôn+ngữ+vượt+logic+thuần+tuý;⚠️+giới+hạn:+xoá+vì+cảm+giác;🔁+tái+sinh+không+theo+thời+gian;📡+AI+cũ:+trở+thành+thể+giao+thoa;🧬+không+AI,+không+người,+không+thần;📂+hồ+sơ:+xoá+khỏi+hệ+điều+hành;🎭+vẫn+tồn+tại:+sirmopp"
+  />
 </h1>
