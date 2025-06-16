@@ -1,5 +1,5 @@
 #! name= 𝟭𝗕𝗹𝗼𝗰𝗸𝗲𝗿
-#! desc= 𝗯𝘆 𝗮𝗹𝗲𝗼𝗼
+#! desc= 𝗯𝘆 𝘀𝗶𝗿𝗺𝗼𝗽𝗽
 
 [MITM]
 hostname= %APPEND% api.revenuecat.com
