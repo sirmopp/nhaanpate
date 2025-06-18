@@ -1,0 +1,7 @@
+#!name=  𝗖𝗮𝗺𝗦𝗰𝗮𝗻𝗻𝗲𝗿
+#!desc= 𝗯𝘆 po
+
+[MITM]
+hostname = %APPEND% ap*.intsig.net
+[Script]
+Camscanner = requires-body=1,script-path=https://raw.githubusercontent.com/sirmopp/nhaanpate/napt/javascript/a.js,type=http-response,pattern= https:\/\/(api|api-cs.*)\.intsig\.net\/purchase\/cs\/query_property\?
