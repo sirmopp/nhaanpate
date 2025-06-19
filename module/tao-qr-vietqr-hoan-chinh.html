@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tạo Mã QR Thanh Toán</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+    h1 {
+      margin-top: 24px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 90%;
+      max-width: 400px;
+    }
+    input, select, button {
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      font-size: 16px;
+    }
+    input {
+      background-color: #111;
+      color: #fff;
+    }
+    button {
+      background-color: #000;
+      color: #fff;
+      border: 2px solid #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .select-items div {
+      padding: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+    .select-items div:hover {
+      background-color: #222;
+    }
+    .select-selected {
+      background-color: #111;
+      padding: 10px;
+    }
+    #qrCode {
+      margin-top: 24px;
+      text-align: center;
+    }
+    img.bank-logo {
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tạo QR Thanh Toán</h1>
+  <form id="qrForm">
+    <input type="text" id="accountName" placeholder="Tên người nhận" required />
+    <input type="text" id="accountNo" placeholder="Số tài khoản" required />
+    <div class="select-selected" id="bankSelect">Chọn ngân hàng / ví điện tử</div>
+    <div class="select-items" id="bankList"></div>
+    <input type="text" id="amount" placeholder="Nhập số tiền" />
+    <input type="text" id="description" placeholder="Nội dung chuyển khoản (không bắt buộc)" />
+    <button type="submit">Tạo QR</button>
+    <button type="button" onclick="resetInfo()">Đổi thông tin</button>
+  </form>
+  <div id="qrCode"></div>
+  <script>
+    const bankList = [
+      { name: "ACB", bin: "970416", logo: "https://upload.wikimedia.org/wikipedia/commons/f/f4/Logo_ACB.svg" },
+      { name: "Agribank", bin: "970405", logo: "https://upload.wikimedia.org/wikipedia/commons/0/09/Agribank_logo.svg" },
+      { name: "BIDV", bin: "970418", logo: "https://upload.wikimedia.org/wikipedia/commons/1/17/Logo_BIDV.png" },
+      { name: "Momo", bin: "999001", logo: "https://upload.wikimedia.org/wikipedia/commons/f/f7/MoMo_Logo.png" },
+      { name: "ZaloPay", bin: "999002", logo: "https://upload.wikimedia.org/wikipedia/commons/3/3e/ZaloPay_logo.svg" },
+      { name: "Vietcombank", bin: "970436", logo: "https://upload.wikimedia.org/wikipedia/commons/6/6b/Logo_Vietcombank.png" },
+      { name: "VietinBank", bin: "970415", logo: "https://upload.wikimedia.org/wikipedia/commons/2/25/Logo_VietinBank.svg" },
+      { name: "Techcombank", bin: "970407", logo: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Techcombank_logo.svg" }
+    ];
+
+    let selectedBank = null;
+    let locked = false;
+
+    const bankListDiv = document.getElementById("bankList");
+    const bankSelect = document.getElementById("bankSelect");
+
+    function populateBanks() {
+      bankList.sort((a, b) => a.name.localeCompare(b.name));
+      bankListDiv.innerHTML = "";
+      bankList.forEach(bank => {
+        const item = document.createElement("div");
+        item.innerHTML = '<img class="bank-logo" src="' + bank.logo + '"/> ' + bank.name;
+        item.onclick = () => {
+          if (!locked) {
+            selectedBank = bank;
+            bankSelect.innerHTML = '<img class="bank-logo" src="' + bank.logo + '"/> ' + bank.name;
+            bankListDiv.style.display = "none";
+          }
+        };
+        bankListDiv.appendChild(item);
+      });
+    }
+
+    bankSelect.onclick = () => {
+      if (!locked) {
+        bankListDiv.style.display = bankListDiv.style.display === "block" ? "none" : "block";
+      }
+    };
+
+    document.getElementById("accountName").addEventListener("input", (e) => {
+      e.target.value = e.target.value.toUpperCase();
+    });
+
+    document.getElementById("amount").addEventListener("input", (e) => {
+      let val = e.target.value.replace(/[^\d]/g, "");
+      e.target.value = val.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    });
+
+    document.getElementById("qrForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (!selectedBank) return alert("Chọn ngân hàng trước nha!");
+
+      const name = document.getElementById("accountName").value;
+      const no = document.getElementById("accountNo").value;
+      const amount = document.getElementById("amount").value.replace(/\./g, "");
+      const desc = document.getElementById("description").value;
+
+      const qrImg = document.createElement("img");
+      qrImg.src = `https://img.vietqr.io/image/${selectedBank.bin}-${no}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(desc)}&accountName=${encodeURIComponent(name)}`;
+      qrImg.style.marginTop = "20px";
+      qrImg.style.width = "250px";
+
+      document.getElementById("qrCode").innerHTML = "";
+      document.getElementById("qrCode").appendChild(qrImg);
+
+      localStorage.setItem("accountName", name);
+      localStorage.setItem("accountNo", no);
+      localStorage.setItem("selectedBank", JSON.stringify(selectedBank));
+
+      locked = true;
+      lockFields(true);
+    });
+
+    function lockFields(state) {
+      document.getElementById("accountName").disabled = state;
+      document.getElementById("accountNo").disabled = state;
+    }
+
+    function resetInfo() {
+      locked = false;
+      lockFields(false);
+    }
+
+    window.onload = () => {
+      populateBanks();
+      const savedName = localStorage.getItem("accountName");
+      const savedNo = localStorage.getItem("accountNo");
+      const savedBank = localStorage.getItem("selectedBank");
+
+      if (savedName) document.getElementById("accountName").value = savedName;
+      if (savedNo) document.getElementById("accountNo").value = savedNo;
+      if (savedBank) {
+        selectedBank = JSON.parse(savedBank);
+        bankSelect.innerHTML = '<img class="bank-logo" src="' + selectedBank.logo + '"/> ' + selectedBank.name;
+      }
+
+      if (savedName && savedNo && savedBank) {
+        locked = true;
+        lockFields(true);
+      }
+    };
+  </script>
+</body>
+</html>
